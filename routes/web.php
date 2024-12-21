@@ -1,27 +1,10 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-$task = [
-    "first" => "Task 1",
-    "second" => "Task 2",
-    "third" => "Task 3"
-];
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('about', function() {
     return view('about');
@@ -47,22 +30,12 @@ Route::get('debug', function() {
     ddd($dataArray);
 });
 
-Route::get('tasks', function() use($task) {
-    if (request()->search) {
-        return $task[request()->search];
-    }
+Route::post('task', [TaskController::class, 'store']);
+Route::get('tasks', [TaskController::class, 'index']);
+Route::get('task/{param}', [TaskController::class, 'show']);
+Route::patch('task/{param}', [TaskController::class, 'update']);
+Route::delete('task/{param}', [TaskController::class, 'delete']);
 
-    return $task;
-});
-
-Route::get('task/{name}', function($param) use($task) {
-    return response()->json([
-        "task" => $task[$param]
-    ]); 
-});
-
-Route::post('/task', function() use($task) {
-    $task[request()->label] = request()->task;
-    
-    return $task;
+Route::get('all-req', function() {
+    return ddd(request()->all());
 });
