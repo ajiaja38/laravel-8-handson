@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+$task = [
+    "first" => "Task 1",
+    "second" => "Task 2",
+    "third" => "Task 3"
+];
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -39,4 +45,24 @@ Route::get('debug', function() {
     ];
 
     ddd($dataArray);
+});
+
+Route::get('tasks', function() use($task) {
+    if (request()->search) {
+        return $task[request()->search];
+    }
+
+    return $task;
+});
+
+Route::get('task/{name}', function($param) use($task) {
+    return response()->json([
+        "task" => $task[$param]
+    ]); 
+});
+
+Route::post('/task', function() use($task) {
+    $task[request()->label] = request()->task;
+    
+    return $task;
 });
