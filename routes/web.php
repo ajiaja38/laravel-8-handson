@@ -32,9 +32,9 @@ Route::get('debug', function() {
 
 Route::post('task', [TaskController::class, 'store']);
 Route::get('tasks', [TaskController::class, 'index']);
-Route::get('task/{param}', [TaskController::class, 'show']);
-Route::patch('task/{param}', [TaskController::class, 'update']);
-Route::delete('task/{param}', [TaskController::class, 'delete']);
+Route::get('task/{id}', [TaskController::class, 'show']);
+Route::patch('task/{id}', [TaskController::class, 'update']);
+Route::delete('task/{id}', [TaskController::class, 'delete']);
 
 Route::get('all-req', function() {
     return ddd(request()->all());
