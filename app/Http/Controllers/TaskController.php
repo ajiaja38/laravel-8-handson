@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,12 +19,12 @@ class TaskController extends Controller
             ->toArray();
         }
 
-        return DB::table('task')->get()->toArray();
+        return Task::all()->toArray();
     }
 
     public function store(Request $request): string
     {
-        DB::table('task')->insert([
+        Task::create([
             'task' => $request->task,
             'user' => $request->user
         ]);
@@ -35,7 +36,7 @@ class TaskController extends Controller
     {
         return response()->json([
             "message" => "success get task",
-            "data" => DB::select('SELECT * FROM task WHERE id = ?', [$param])[0]
+            "data" => Task::find($param)
         ]);
     }
 
@@ -53,7 +54,8 @@ class TaskController extends Controller
 
     public function delete($param)
     {
-        DB::statement('DELETE FROM task WHERE id = ?', [$param]);
+        $task = Task::find($param);
+        $task->delete();
 
         return response()->json([
             "message" => "success delete task",
