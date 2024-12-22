@@ -73,9 +73,6 @@ class TaskController extends Controller
         $task = Task::find($param);
         $task->delete();
 
-        return response()->json([
-            "message" => "success delete task",
-            "data" => DB::select('SELECT * FROM task')
-        ]);
+        return redirect()->route('tasks');
     }
 }
