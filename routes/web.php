@@ -5,11 +5,19 @@ use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
+Route::post('task', [TaskController::class, 'store']);
+Route::get('tasks', [TaskController::class, 'index'])->name('tasks');
+Route::get('task/{id}', [TaskController::class, 'show']);
+Route::patch('task/{id}', [TaskController::class, 'update']);
+Route::delete('task/{id}', [TaskController::class, 'delete']);
+
+Route::get('all-req', function() {
+    return ddd(request()->all());
+});
 Route::get('welcome', [HomeController::class, 'index']);
 Route::get('about', function() {
     return view('about');
 });
-
 Route::get('hello', function() {
     $dataArray = [
         "name" => "John Doe",
@@ -28,14 +36,4 @@ Route::get('debug', function() {
     ];
 
     ddd($dataArray);
-});
-
-Route::post('task', [TaskController::class, 'store']);
-Route::get('tasks', [TaskController::class, 'index']);
-Route::get('task/{id}', [TaskController::class, 'show']);
-Route::patch('task/{id}', [TaskController::class, 'update']);
-Route::delete('task/{id}', [TaskController::class, 'delete']);
-
-Route::get('all-req', function() {
-    return ddd(request()->all());
 });

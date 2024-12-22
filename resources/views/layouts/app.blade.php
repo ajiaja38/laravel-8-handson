@@ -19,7 +19,7 @@
     </style>
 </head>
 
-<body>
+<body class="mb-5">
   @include('layouts.components.navbar')
 
   @yield('main')

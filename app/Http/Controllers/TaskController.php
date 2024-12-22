@@ -8,18 +8,18 @@ use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
-    public function index(Request $request): array
+    public function index(Request $request)
     {
         if (request()->search)
         {
-            $search = strtolower($request->search);
-            return DB::table('task')
-            ->whereRaw('LOWER(task) LIKE ?', ['%' . $search . '%'])
-            ->get()
-            ->toArray();
+            $tasks = Task::where('task', 'like', '%' . request()->search . '%')->paginate(3);
+            return view('task.index', compact('tasks'));
         }
 
-        return Task::all()->toArray();
+        $tasks = Task::paginate(3);
+        return view('task.index', [
+            'data' => $tasks
+        ]);
     }
 
     public function store(Request $request): string
