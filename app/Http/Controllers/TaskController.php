@@ -22,14 +22,21 @@ class TaskController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return view('task.create');
+    }
+
     public function store(Request $request): string
     {
-        Task::create([
-            'task' => $request->task,
-            'user' => $request->user
+        $validateData = $request->validate([
+            'user' => 'required|string|max:255',
+            'task' => 'required|string|min:3|max:255'
         ]);
 
-        return 'success insert task';
+        Task::create($validateData);
+
+        return redirect()->route('tasks');
     }
 
     public function show($param)
