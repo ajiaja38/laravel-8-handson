@@ -58,12 +58,14 @@ class TaskController extends Controller
 
     public function update(Request $request, $param)
     {
+        $validateData = $request->validate([
+            'user' => 'required|string|max:255',
+            'task' => 'required|string|min:3|max:255'
+        ]);
+
         $tableTask = DB::table('task');
 
-        $tableTask->where('id', $param)->update([
-            'task' => $request->task,
-            'user' => $request->user
-        ]);
+        $tableTask->where('id', $param)->update($validateData);
 
         return redirect()->route('tasks');
     }
