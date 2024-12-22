@@ -14,7 +14,7 @@
       </div>
       <div class="col-10 mb-1 small">{{$item->user}}</div>
       <div class="group-action">
-        <a href="#" class="badge bg-info text-white">edit</a>
+        <a href="{{ url("/task/$item->id/edit") }}" class="badge bg-info text-white">edit</a>
         <a href="#" class="badge bg-danger text-white">delete</a>
       </div>
     </div>

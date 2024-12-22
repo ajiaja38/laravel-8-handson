@@ -12,11 +12,14 @@ class TaskController extends Controller
     {
         if (request()->search)
         {
-            $tasks = Task::where('task', 'like', '%' . request()->search . '%')->paginate(3);
+            $tasks = Task::where('task', 'like', '%' . request()->search . '%')
+                ->orderBy('updated_at', 'desc')
+                ->paginate(5);;
+
             return view('task.index', compact('tasks'));
         }
 
-        $tasks = Task::paginate(3);
+        $tasks = Task::orderBy('updated_at', 'desc')->paginate(5);
         return view('task.index', [
             'data' => $tasks
         ]);
@@ -47,7 +50,13 @@ class TaskController extends Controller
         ]);
     }
 
-    public function update(Request $request, $param): array
+    public function edit($id)
+    {
+        $task = Task::find($id);
+        return view('task.edit', compact('task'));
+    }
+
+    public function update(Request $request, $param)
     {
         $tableTask = DB::table('task');
 
@@ -56,7 +65,7 @@ class TaskController extends Controller
             'user' => $request->user
         ]);
 
-        return $tableTask->get()->toArray();
+        return redirect()->route('tasks');
     }
 
     public function delete($param)

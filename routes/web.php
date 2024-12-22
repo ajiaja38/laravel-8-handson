@@ -9,6 +9,7 @@ Route::get('task/create', [TaskController::class, 'create']);
 Route::post('task', [TaskController::class, 'store']);
 Route::get('tasks', [TaskController::class, 'index'])->name('tasks');
 Route::get('task/{id}', [TaskController::class, 'show']);
+Route::get('task/{id}/edit', [TaskController::class, 'edit']);
 Route::patch('task/{id}', [TaskController::class, 'update']);
 Route::delete('task/{id}', [TaskController::class, 'delete']);
 
