@@ -6,7 +6,7 @@
       </ul>
       <div class="text-end">
         <button type="button" class="btn btn-outline-light me-2">Login</button>
-        <button type="button" class="btn btn-warning">Sign-up</button>
+        <button type="button" class="btn btn-warning">Register</button>
       </div>
     </div>
   </div>
