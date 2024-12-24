@@ -29,7 +29,7 @@
       </form>
     </div>
     <div class="card-footer text-muted">
-      Handson Laravel 8
+      Handson Laravel 8 Yagesya
     </div>
   </div>
 </div>
