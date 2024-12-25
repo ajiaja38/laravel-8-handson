@@ -3,7 +3,7 @@
 <div class="mt-5 mx-auto" style="width: 380px;">
   <div class="card">
     <div class="card-header">
-      <h3>Add Task</h3>
+      <h3>Add new Task</h3>
     </div>
     <div class="card-body">
       @if ($errors->any())
