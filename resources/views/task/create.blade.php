@@ -18,7 +18,7 @@
       <form action="{{ url('task') }}" method="POST">
         @csrf
         <div class="mb-3">
-          <label for="" class="form-label">User</label>
+          <label for="" class="form-label">Users</label>
           <input name="user" type="text" class="form-control">
         </div>
         <div class="mb-3">
